@@ -8,6 +8,9 @@ public class KnightController : MonoBehaviour
     [SerializeField]
     private float speed = 1;
 
+    [SerializeField]
+    GameObject sword;
+
     Animator _animator;
 
     // Start is called before the first frame update
@@ -16,35 +19,59 @@ public class KnightController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
+    bool isAttacking = false;
     // Update is called once per frame
     void Update()
     {
-        float vx = Input.GetAxisRaw("Horizontal");
-        if (vx != 0)
+        if (isAttacking == false)
         {
-            _animator.SetBool("IsMoving", true);
+            float vx = Input.GetAxisRaw("Horizontal");
+            if (vx != 0)
+            {
+                _animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                _animator.SetBool("IsMoving", false);
+            }
         }
         else
         {
             _animator.SetBool("IsMoving", false);
         }
+
+        if(Input.GetButtonDown("Fire1") && isAttacking == false)
+        {
+            _animator.SetTrigger("Attack");
+            isAttacking = true;
+            sword.SetActive(true);
+        }
+    }
+
+    public void EndOfAttack()
+    {
+        isAttacking = false;
+        sword.SetActive(false);
     }
 
     private void LateUpdate()
     {
-        float vx = Input.GetAxisRaw("Horizontal");
-        if (vx != 0)
+        if (isAttacking == false)
         {
-            transform.Translate(new Vector3(vx * speed * Time.deltaTime, 0, 0));
-        }
+            float vx = Input.GetAxisRaw("Horizontal");
+            if (vx != 0)
+            {
+                transform.Translate(new Vector3(vx * speed * Time.deltaTime, 0, 0));
+            }
 
-        if (vx > 0 && transform.localScale.x < 0
-            ||
-            vx < 0 && transform.localScale.x > 0)
-        {
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            if (vx > 0 && transform.localScale.x < 0
+                ||
+                vx < 0 && transform.localScale.x > 0)
+            {
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
         }
     }
 }
