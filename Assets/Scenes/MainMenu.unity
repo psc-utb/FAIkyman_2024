@@ -1387,7 +1387,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Controls:
 
-    WASD or arrows for movement and space for attack
+    WASD or arrows for movement and left CTRL for attack
 
 '
 --- !u!222 &810693805
