@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WaypointSceneManager : MonoBehaviour
+public class TriggerSceneManager : MonoBehaviour
 {
     [SerializeField]
     string sceneName;
@@ -21,10 +20,20 @@ public class WaypointSceneManager : MonoBehaviour
     [SerializeField]
     string ShowText;
 
+
+    [SerializeField]
+    bool TriggerOnce = true;
+    bool wasTriggered = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (TriggerOnce == true && wasTriggered == true)
+            return;
+
         if (collision.gameObject == triggerGO)
         {
+            wasTriggered = true;
+
             var go = new GameObject();
             go.name = $"TextGeneratedFromScript";
             go.transform.position = new Vector2(transform.position.x, transform.position.y + 1);
@@ -40,9 +49,10 @@ public class WaypointSceneManager : MonoBehaviour
             text.alignment = TextAlignmentOptions.Center;
 
             text.text = ShowText;
-            text.color = Color.cyan;
+            text.color = Color.black;
 
             text.renderer.sortingLayerName = "UI";
+            text.renderer.sortingOrder = 7;
             text.rectTransform.sizeDelta = new Vector2(2, 2);
 
             Rigidbody2D rb2D = go.AddComponent<Rigidbody2D>();
