@@ -25,6 +25,9 @@ public class TriggerSceneManager : MonoBehaviour
     bool TriggerOnce = true;
     bool wasTriggered = false;
 
+    [SerializeField]
+    Color textColor;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (TriggerOnce == true && wasTriggered == true)
@@ -49,7 +52,7 @@ public class TriggerSceneManager : MonoBehaviour
             text.alignment = TextAlignmentOptions.Center;
 
             text.text = ShowText;
-            text.color = Color.black;
+            text.color = textColor;
 
             text.renderer.sortingLayerName = "UI";
             text.renderer.sortingOrder = 7;

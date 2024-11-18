@@ -1263,6 +1263,7 @@ MonoBehaviour:
   font: {fileID: 11400000, guid: 58bff4be622194a5a829cdda15572fab, type: 2}
   ShowText: Come down here!
   TriggerOnce: 1
+  textColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &635424662
 PrefabInstance:
   m_ObjectHideFlags: 0

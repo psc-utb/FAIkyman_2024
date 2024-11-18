@@ -19,6 +19,7 @@ public class DeathAnimController : MonoBehaviour
 
     public void DestroyGameObject()
     {
-        Destroy(this.gameObject);
+        Destroy(this.gameObject.transform.parent.gameObject);
+        //Destroy(this.gameObject);
     }
 }

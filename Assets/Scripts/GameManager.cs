@@ -9,4 +9,18 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("BossScene");
     }
+
+    public void DeathScene(float delay)
+    {
+        StartCoroutine(LoadSceneAfterSecond("Death", delay));
+    }
+
+    private IEnumerator LoadSceneAfterSecond(string sceneName, float delay)
+    {
+        if (string.IsNullOrEmpty(sceneName) == false)
+        {
+            yield return new WaitForSeconds(delay);
+            SceneManager.LoadScene(sceneName);
+        }
+    }
 }
